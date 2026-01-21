@@ -4,11 +4,7 @@
 #include "ui.h"
 #include <memory>
 
-enum class AppState {
-  EDITING,
-  RUNNING,
-  FINISHED
-};
+enum class AppState { EDITING, RUNNING, FINISHED };
 
 int main() {
   const int screenWidth = 1200;
@@ -20,6 +16,13 @@ int main() {
 
   InitWindow(screenWidth, screenHeight, "Pathfinding");
   SetTargetFPS(60);
+
+  Image icon = LoadImage("resources/icon.jpg");
+  if (icon.data != nullptr) {
+    ImageFormat(&icon, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8); // Convert to RGBA
+    SetWindowIcon(icon);
+    UnloadImage(icon);
+  }
 
   Grid grid(gridWidth, gridHeight, cellSize);
 
@@ -34,9 +37,8 @@ int main() {
   const int PANEL_HEIGHT = 700;
   const int UI_PADDING = 15;
 
-  const int STATS_END_Y =
-      60 + 140; 
-  const int BUTTON_START_Y = STATS_END_Y + 40; 
+  const int STATS_END_Y = 60 + 140;
+  const int BUTTON_START_Y = STATS_END_Y + 40;
   const int BUTTON_SPACING = 10;
   const int BUTTON_HEIGHT = 35;
 
